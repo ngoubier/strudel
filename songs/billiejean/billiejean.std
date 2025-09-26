@@ -1,14 +1,15 @@
 setcpm(117/4)
+
 samples({
-  bd: "https://ngoubier.github.io/strudel/samples/drums/bassdrum/kick-billie-jean_117bpm_C_major.wav",
-  hihat: "https://raw.githubusercontent.com/tidalcycles/Dirt-Samples/master/hh27/000_hh27closedhh.wav",
-  sd: ["https://ngoubier.github.io/strudel/samples/drums/snare/bright-snare-billie-jean_C.wav"],
+  bd: 'https://ngoubier.github.io/strudel/samples/drums/bassdrum/kick-billie-jean_117bpm_C_major.wav',
+  hihat: 'https://raw.githubusercontent.com/tidalcycles/Dirt-Samples/master/hh27/000_hh27closedhh.wav',
+  sd: ['https://ngoubier.github.io/strudel/samples/drums/snare/bright-snare-billie-jean_C.wav'],
 });
 
 $:s("bd sd bd sd, hihat*8")
 
 $:note("f#2 c#2 e2 f#2 e2 c#2 b1 c#2, f#1 [-]") 
-  .s("sawtooth")    // onde carrée → plus riche en harmoniques
+  .s("sawtooth")    
   .attack(0.005)  
   .decay(0.15)
   .sustain(0.1)
