@@ -7,28 +7,32 @@ samples({
 
 const MAIN_KICK = s("bd".struct("x - x -"))
 const MAIN_SNARE = s("sd".struct("- x - x"))
+const MAIN_HIHAT = s("tr808_hh").struct ("x x x x x x x x")
 const MAIN_SHAKER = s("alesissr16_sh:1").struct ("x x x x x x x x")
 
-const BASS_MAIN = note("f#2 c#2 e2 f#2 e2 c#2 b1 c#2, f#1 [-]") 
-  .s("sawtooth")    
-  .attack(0.005)  
-  .decay(0.15)
-  .sustain(0.1)
-  .release(0.0)
-  .cutoff(300)    
-  .lpf("200")
-  .gain(1.2)
+const BASS_MAIN = note("f#2 c#2 e2 f#2 e2 c#2 b1 c#2, f#1 - - f#1 - - - -").s("sawtooth").cutoff(300).lpf("200").attack(0).decay(0.2).sustain(0.01).gain(1.2)
+const BASS_MAIN1 = note("f#1 - - f#1 - - - -").s("sawtooth").cutoff(700).lpf("200").attack(0).decay(0.2).sustain(0.01).gain(2)
 
 const SYNTH_MAIN = note("< [[a3, c#4, f#4] - - [b3, d#4, g#4] - - - -] [[c#4, e4, a4] - -  [b3, d#4, g#4] - - - -]>")
   .s("gm_synth_brass_1")    
   .attack(0.1)
   .decay(0.3)
   .sustain(0.9)
-  .release(0.3)
+  .release(0.5)
   .cutoff(1500)    
 
 
-const DRUMS_MAIN = stack(MAIN_KICK, MAIN_SNARE, MAIN_SHAKER)
+const DRUMS_MAIN_INTRO = stack(MAIN_KICK, MAIN_SNARE, MAIN_HIHAT)
+const DRUMS_MAIN = stack(MAIN_KICK, MAIN_SNARE, MAIN_HIHAT, MAIN_SHAKER)
 
-stack (DRUMS_MAIN, BASS_MAIN, SYNTH_MAIN)
+const intro1 = DRUMS_MAIN_INTRO
+const intro2 = stack(DRUMS_MAIN, BASS_MAIN, BASS_MAIN1)
+const intro3 = stack(DRUMS_MAIN, BASS_MAIN, BASS_MAIN1, SYNTH_MAIN)
 
+// 5) Forme du morceau : [mesures, section]
+arrange(
+  [2, intro1],   // 2 mesures intro1
+  [4, intro2],   // 4 mesures intro2
+  [4, intro3]    // 4 mesures intro3
+
+)
