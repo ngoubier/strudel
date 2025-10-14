@@ -1,0 +1,85 @@
+setcpm(87/4)
+
+const MAIN_KICK = s("9000_bd".struct("x x x x"))//.duck("2:3")
+const MAIN_SNARE = s("akailinn_sd".struct("- x - x")).room(0.4).shape("0.7")
+
+const MAIN_DRUMS = stack(MAIN_KICK, MAIN_SNARE)
+
+const MAIN_BASS = note("a1@7 b1@7 g1 f1@7 e1 d1@7 g1 a1").slow(4).s("supersaw")
+  .cutoff(slider(248,0,1000))
+  .lpq(slider(8,0,50))
+  .lpenv(4)     // active l’enveloppe de filtre
+  .lpa(.1)     // attack filtre
+  .lpd(slider(1,0,5))     // decay filtre
+  .lps(slider(0,0,5))      // sustain filtre
+  .lpr(.01)      // release filtre
+  .distort(0.5)
+  .room(0.1)
+  .shape("0.5")
+  .orbit(2)
+  .gain(0.7)
+
+const MAIN_SYNTH = arrange([1, "e4 a4 c5 e4 a4 c5 e4 a4"],
+                           [1,"d4 g4 b4 d4 g4 b4 d4 g4"],
+                           [1,"c4 f4 a4 c4 f4 a4 c4 f4"],
+                           [1,"d4 f4 a4 d4 f4 a4 d4 f4"])
+  .note().s("supersaw")
+  .cutoff(slider(498,0,1000))
+  .lpq(slider(10,0,50))
+  .lpenv(3)     // active l’enveloppe de filtre
+  //.lpa(.0)     // attack filtre
+  .lpd(slider(0.48,0,1))     // decay filtre
+  .lps(slider(0.27,0,5))      // sustain filtre
+  .lpr(.5)      // release filtre
+  .distort(0.5)
+  .room(1)
+  .gain(0.7)
+
+const CHORUS_BASS = note("f1@6 e1 g1@7 a1 e1@7 d1 f1@8 f1").slow(4).s("supersaw")
+  .cutoff(slider(540,0,1000))
+  .lpq(slider(0,0,50))
+  .lpenv(1)     // active l’enveloppe de filtre
+  .lpa(.1)     // attack filtre
+  .lpd(slider(1,0,5))     // decay filtre
+  .lps(slider(0,0,5))      // sustain filtre
+  .lpr(.01)      // release filtre
+  .distort(0.5)
+  .room(0.1)
+  .shape("0.5")
+  .orbit(2)
+  .gain(0.8)
+
+const CHORUS_SYNTH = arrange([1, "f4 a4 c5 f4 a4 c5 f4 a4"],
+                           [1,"g4 b4 d5 g4 b4 d5 g4 b4"],
+                           [1,"e4 g4 b4 e4 g4 b4 e4 g4"],
+                           [1,"f4 a4 c5 f4 a4 c5 f4 a4"])
+  .note().s("supersaw")
+  .cutoff(slider(498,0,1000))
+  .lpq(slider(10,0,50))
+  .lpenv(3)     // active l’enveloppe de filtre
+  //.lpa(.0)     // attack filtre
+  .lpd(slider(0.48,0,1))     // decay filtre
+  .lps(slider(0.27,0,5))      // sustain filtre
+  .lpr(.5)      // release filtre
+  .distort(0.5)
+  .room(1)
+  .gain(0.4)
+
+const CHORUS_STRINGS = note("<[f4, a4, c5]@0.875 [g4, b4, d5] [e4, g4, b4] [f4, a4, c5]@1.125>" ).s("gm_synth_strings_1")
+  .cutoff(slider(4000,0,10000))
+  .room(1)
+  .gain(0.7)
+
+
+const intro = stack(MAIN_DRUMS,MAIN_BASS, MAIN_SYNTH)
+const verse = stack(MAIN_DRUMS,MAIN_BASS, MAIN_SYNTH)
+const chorus = stack(MAIN_DRUMS,CHORUS_BASS, CHORUS_STRINGS, CHORUS_SYNTH)
+
+
+arrange(
+  [8, intro],
+  [8,chorus]
+  )
+
+  
+
